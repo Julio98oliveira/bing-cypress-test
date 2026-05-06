@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  e2e-tests:
+  cypress-run:
 
     runs-on: ubuntu-latest
 
@@ -13,25 +13,14 @@ jobs:
       - name: Checkout do projeto
         uses: actions/checkout@v4
 
-      - name: Configurar Node.js
-        uses: actions/setup-node@v4
+      - name: Executar Cypress
+        uses: cypress-io/github-action@v6
         with:
-          node-version: 20
-
-      - name: Instalar dependências
-        run: npm install
-
-      - name: Instalar Cypress Binary
-        run: npx cypress install
-
-      - name: Dar permissão ao Cypress
-        run: chmod +x node_modules/.bin/cypress
-
-      - name: Executar testes Cypress
-        run: npx cypress run
+          browser: chrome
 
       - name: Upload screenshots
         uses: actions/upload-artifact@v4
         with:
           name: screenshots
           path: cypress/screenshots
+          
