@@ -21,8 +21,8 @@ jobs:
       - name: Instalar dependências
         run: npm install
 
-      - name: Instalar Cypress
-        run: npx cypress install
+      - name: Dar permissão ao Cypress
+        run: chmod +x node_modules/.bin/cypress
 
       - name: Executar testes Cypress
         run: npx cypress run
